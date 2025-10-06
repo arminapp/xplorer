@@ -47,7 +47,10 @@ python3 srcs/scripts/habitability_analysis.py
 # 2. XGBoost machine learning model
 python3 srcs/scripts/xgboost_habitability.py
 
-# 3. Open Jupyter notebook for full analysis
+# 3. Stellar correlation analysis
+python3 create_habitable_stars_figure.py
+
+# 4. Open Jupyter notebook for full analysis
 jupyter notebook srcs/scripts/exoplanet_habitability_analysis.ipynb
 ```
 
@@ -71,6 +74,8 @@ xplorer/
 │   │   ├── fig3_top_candidates.png                         # Top candidates
 │   │   ├── fig4_ml_analysis.png                            # ML analysis
 │   │   ├── fig5_physics_vs_ml.png                          # Physics vs ML
+│   │   ├── fig_habitable_planets_and_stars.png              # Stellar correlations
+│   │   ├── fig_habitable_planets_and_stars_simplified.png   # Simplified stellar analysis
 │   │   ├── feature_importance.png                          # Feature importance
 │   │   ├── roc_curve.png                                   # ROC curve
 │   │   ├── pr_curve.png                                    # Precision-Recall
@@ -79,6 +84,7 @@ xplorer/
 │       ├── habitability_analysis.py                         # Physics-based analysis
 │       ├── xgboost_habitability.py                          # Machine learning script
 │       ├── nearby_habitable_analysis.py                     # Distance analysis
+│       ├── create_habitable_stars_figure.py                 # Stellar correlation analysis
 │       └── exoplanet_habitability_analysis.ipynb            # Jupyter notebook
 ├── requirements.txt                                         # Python dependencies
 └── README.md                                                # This file
@@ -104,6 +110,8 @@ xplorer/
 - **`srcs/figures/fig3_top_candidates.png`** - Top 20 habitable candidates analysis with ESI vs temperature
 - **`srcs/figures/fig4_ml_analysis.png`** - XGBoost model performance and feature analysis
 - **`srcs/figures/fig5_physics_vs_ml.png`** - Comparison between physics-based and ML approaches
+- **`srcs/figures/fig_habitable_planets_and_stars.png`** - Comprehensive analysis of habitable planets and their stellar correlations
+- **`srcs/figures/fig_habitable_planets_and_stars_simplified.png`** - Simplified version focusing on key stellar-planetary relationships
 - **`srcs/figures/feature_importance.png`** - XGBoost feature importance ranking
 - **`srcs/figures/roc_curve.png`** - ROC curve showing 99.7% AUC performance
 - **`srcs/figures/pr_curve.png`** - Precision-Recall curve for imbalanced dataset
@@ -162,6 +170,28 @@ xplorer/
 - **ESI Color Coding**: Viridis colormap showing Earth similarity
 
 ![Physics vs ML](srcs/figures/fig5_physics_vs_ml.png)
+
+### Habitable Planets and Stellar Correlations (`srcs/figures/fig_habitable_planets_and_stars.png`)
+- **Comprehensive Analysis**: 12-panel visualization showing relationships between habitable planets and their host stars
+- **Stellar Temperature Correlations**: Habitable planets show preference for cooler stars (K and M types)
+- **Habitable Zone Positioning**: Clear clustering within conservative and optimistic HZ boundaries
+- **Stellar Type Distribution**: K-type stars dominate habitable planet hosts (followed by G and M types)
+- **Mass-Radius Relationships**: Habitable planets around stars following main-sequence mass-radius relation
+- **Parameter Correlations**: Heatmap showing strong correlations between habitability score, ESI, and stellar properties
+- **Top 10 Summary**: Table of most habitable planets with stellar properties
+- **Key Insight**: Habitable planets preferentially orbit cooler, smaller stars in the habitable zone
+
+![Habitable Planets and Stars](srcs/figures/fig_habitable_planets_and_stars.png)
+
+### Simplified Stellar Analysis (`srcs/figures/fig_habitable_planets_and_stars_simplified.png`)
+- **6-Panel Focus**: Key relationships between habitable planets and stellar properties
+- **Stellar Type Preference**: K-type stars are most common hosts for habitable planets
+- **Temperature Correlation**: Habitable planets cluster around cooler stellar temperatures
+- **HZ Positioning**: Strong correlation between habitable zone position and stellar temperature
+- **ESI vs Stellar Properties**: Earth-like planets show preference for Sun-like (G-type) stars
+- **Summary Statistics**: Quantitative analysis of stellar properties for habitable planets
+
+![Simplified Stellar Analysis](srcs/figures/fig_habitable_planets_and_stars_simplified.png)
 
 ### Advanced ML Analysis
 - **`feature_importance.png`**: XGBoost feature ranking with importance values
@@ -234,6 +264,28 @@ Score = 0.35×HZ + 0.25×Temperature + 0.25×ESI + 0.15×Size/Mass
 4. Equilibrium temperature
 5. Size/mass score
 
+## 🌟 Key Stellar Findings
+
+### Habitable Planet Host Star Characteristics
+- **Stellar Type Preference**: K-type stars (5,200-6,000K) are the most common hosts for habitable planets
+- **Temperature Range**: Habitable planets cluster around stars with temperatures 4,000-6,500K
+- **Stellar Mass**: Most habitable planets orbit stars with masses 0.6-1.2 M☉
+- **Stellar Radius**: Host stars typically have radii 0.7-1.3 R☉
+- **Luminosity Correlation**: Habitable planets show strong correlation with stellar luminosity and insolation flux
+
+### Stellar Type Distribution for Habitable Planets
+- **K-type stars**: Most common hosts (cooler than Sun, longer-lived)
+- **G-type stars**: Second most common (Sun-like stars)
+- **M-type stars**: Third most common (red dwarfs, very long-lived)
+- **F-type stars**: Less common (hotter than Sun)
+- **A-type stars**: Rare hosts (very hot, short-lived)
+
+### Key Correlations
+- **Stellar Temperature ↔ Planet Temperature**: Strong positive correlation
+- **Stellar Mass ↔ Orbital Period**: Higher mass stars host planets with longer periods
+- **Stellar Luminosity ↔ Insolation**: Direct relationship between stellar output and planet heating
+- **ESI ↔ Stellar Type**: Earth-like planets prefer G-type stars (Sun-like)
+
 ## 📊 Key Statistics
 
 ### Dataset Overview
@@ -284,6 +336,26 @@ Score = 0.35×HZ + 0.25×Temperature + 0.25×ESI + 0.15×Size/Mass
 - **Kepler Mission**: Cumulative KOI table (9,564 planets)
 - **Dataset Date**: October 4, 2025
 
+## 🔬 Scientific Implications
+
+### Stellar Type and Habitability
+- **K-type stars are optimal hosts**: Cooler than the Sun but warmer than M-dwarfs, providing stable habitable zones
+- **Long stellar lifetimes**: K and M-type stars live much longer than G-type stars, allowing more time for life to develop
+- **Stable radiation environment**: Cooler stars provide more stable radiation output compared to hotter stars
+- **Habitable zone stability**: K-type stars have wider, more stable habitable zones than M-dwarfs
+
+### Implications for Planet Formation
+- **Metallicity effects**: K-type stars may have optimal metallicity for rocky planet formation
+- **Disk evolution**: Longer-lived stars allow more time for planet formation and migration
+- **Tidal locking**: Planets around K-type stars are less likely to be tidally locked than M-dwarf planets
+- **Atmospheric retention**: Moderate stellar winds from K-type stars help retain planetary atmospheres
+
+### Search Strategy Implications
+- **Target K-type stars**: Future exoplanet surveys should prioritize K-type stars for habitable planet searches
+- **Stellar age considerations**: Focus on mature K-type stars (1-5 billion years old)
+- **Multi-planet systems**: K-type stars often host multiple planets, increasing chances of habitable worlds
+- **Follow-up observations**: K-type star systems are ideal for atmospheric characterization
+
 ## 🔮 Future Improvements
 
 ### Data Enhancements
@@ -291,6 +363,8 @@ Score = 0.35×HZ + 0.25×Temperature + 0.25×ESI + 0.15×Size/Mass
 - Add James Webb Space Telescope atmospheric observations
 - Include stellar activity indicators (flares, radiation)
 - Orbital eccentricity and stability metrics
+- Stellar age and metallicity data
+- Multi-planet system analysis
 
 ### Advanced ML Techniques
 - **SHAP analysis** for model interpretability
