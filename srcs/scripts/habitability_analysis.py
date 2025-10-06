@@ -467,7 +467,7 @@ def main():
     import sys
 
     # Default to cumulative Kepler dataset
-    data_file = '/Users/armin/Documents/xplorer/cumulative_2025.10.04_15.04.09.csv'
+    data_file = '/Users/armin/Documents/xplorer/data/processed/cumulative_2025.10.04_15.04.09.csv'
 
     if len(sys.argv) > 1:
         data_file = sys.argv[1]

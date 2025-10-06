@@ -386,7 +386,7 @@ def main():
     """Main execution workflow."""
 
     # Load habitability scores from physics-based analysis
-    scores_file = '/Users/armin/Documents/xplorer/cumulative_2025.10.04_15.04.09_habitability_scores.csv'
+    scores_file = '/Users/armin/Documents/xplorer/data/processed/cumulative_2025.10.04_15.04.09_habitability_scores.csv'
 
     # Initialize predictor
     predictor = XGBoostHabitabilityPredictor(scores_file)
@@ -427,16 +427,16 @@ def main():
     y_pred_proba, y_pred = predictor.evaluate_model(X_test, y_test)
 
     # Visualizations
-    predictor.plot_feature_importance('feature_importance.png')
-    predictor.plot_roc_curve(y_test, y_pred_proba, 'roc_curve.png')
-    predictor.plot_precision_recall_curve(y_test, y_pred_proba, 'pr_curve.png')
-
+    predictor.plot_feature_importance('srcs/figures/feature_importance.png')
+    predictor.plot_roc_curve(y_test, y_pred_proba, 'srcs/figures/roc_curve.png')
+    predictor.plot_precision_recall_curve(y_test, y_pred_proba, 'srcs/figures/pr_curve.png')
+    
     # SHAP analysis
-    predictor.shap_analysis(X_test, 'shap_summary.png')
+    predictor.shap_analysis(X_test, 'srcs/figures/shap_summary.png')
 
     # Generate predictions for all planets
     X_full = predictor.prepare_features().values
-    results = predictor.generate_predictions(X_full, 'xgboost_habitability_predictions.csv')
+    results = predictor.generate_predictions(X_full, 'data/processed/xgboost_habitability_predictions.csv')
 
     # Compare ML vs Physics-based scoring
     print("\n" + "="*80)
